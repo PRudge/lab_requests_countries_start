@@ -17,4 +17,13 @@ Countries.prototype.getData = function () {
 
 }
 
+Countries.prototype.bindEvents = function (){
+  PubSub.subscribe('SelectCountry:change', (event) => {
+    const selectedIndex = event.detail;
+    const country = this.countryInfo[selectedIndex];
+
+    PubSub.publish('InfoCountry: country', country);
+  });
+}
+
 module.exports = Countries;
